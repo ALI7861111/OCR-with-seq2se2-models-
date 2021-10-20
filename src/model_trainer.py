@@ -1,5 +1,4 @@
 import torch
-from torch import nn
 import os
 from data_loader import captcha_images_v2_dataset
 class train_NN:
