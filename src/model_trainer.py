@@ -40,7 +40,9 @@ class train_NN:
       loss_total = loss_total/int(len(os.listdir(self.directory_training_data)))
       print('The training loss for epoch '+ str(i) + ' is '+ str(loss_total) )
       print('The validation loss for epoch '+str(i)+' is '+str(self.validation()))
-    print('The testing loss model was '+str(self.test()))
+    test_score = self.test()
+    print('The testing loss model was '+str(test_score))
+    return test_score
 
   def test(self):
     loss_total = 0

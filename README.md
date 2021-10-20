@@ -1,6 +1,16 @@
 # OCR-with-seq2se2-models
-This repository contains OCR development and benchmarking dataset. The purpose of the repository is to compare different approaches i.e. 3D Convolutions, Self Attentions and different architectures and  benchmarking response on the dataset  
+This repository contains Seq2Seq OCR development. The purpose of the repository is to compare and develop best model for OCR using Surrogate function. The features that are optimized to produce best OCR model are as follows. These features are Hyper-parameter and optimized based on surrogate function.
 
+1.  Architectures 
+2.  Learning rates
+3.  Number of convolution layers
+4.  Number of nodes in linear layers
+5.  Number of convolution layers 
+6.  Number of nodes in linear layers
+7.  Growth relationship in convolution layers
+8.  Number of layers in memory units
+9.  Hidden size in memory units
+10. Batch size
 
 ## Dataset
 
@@ -18,6 +28,8 @@ unzip -qq captcha_images_v2.zip
 ```
 
 Than you can create test train and validation data folders from the unzip dataset.
+
+Enter your desired Source, train, test and validation directories in the code below
 
 ``` python
 

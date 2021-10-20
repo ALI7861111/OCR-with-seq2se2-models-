@@ -45,16 +45,16 @@ def objective(trial):
         factor = trial.suggest_categorical("n_growth_factor_{}".format(layer), [1,2])
         growth_array.append(int(factor))
 
-    #number_layer_memory_unit = trial.suggest_categorical('number layer memory unit', [2])
-    number_layer_memory_unit = 2
-    #hidden_size_memory_unit_1 = trial.suggest_categorical('hidden size memory unit 1', [128])
-    hidden_size_memory_unit_1 = 128
-    #hidden_size_memory_unit_2 = trial.suggest_categorical('hidden size memory unit 2', [64])
-    hidden_size_memory_unit_2 = 64
-    #linear_layer_units_1 =  trial.suggest_categorical('linear layer units 1', [512])
-    linear_layer_units_1 = 512
-    #linear_layer_units_2 =  trial.suggest_categorical('linear layer units 2', [256])
-    linear_layer_units_2 = 256
+    number_layer_memory_unit = trial.suggest_categorical('number layer memory unit', [1,2,3])
+    #number_layer_memory_unit = 2
+    hidden_size_memory_unit_1 = trial.suggest_categorical('hidden size memory unit 1', [64,128,256])
+    #hidden_size_memory_unit_1 = 128
+    hidden_size_memory_unit_2 = trial.suggest_categorical('hidden size memory unit 2', [64,128,256])
+    #hidden_size_memory_unit_2 = 64
+    linear_layer_units_1 =  trial.suggest_categorical('linear layer units 1', [128,256,512])
+    #linear_layer_units_1 = 512
+    linear_layer_units_2 =  trial.suggest_categorical('linear layer units 2', [128,256,512])
+    #linear_layer_units_2 = 256
     learning_rate =  trial.suggest_float('learning rate', 0,0.000000001)
     #batch_size    =  trial.suggest_int('batch_size', 16)
     #batch_size    = trial.suggest_categorical('linear layer units 2', [16])
@@ -68,7 +68,7 @@ def objective(trial):
                             input_size=(1,3,50,200), hidden_size_memory_unit_1=int(hidden_size_memory_unit_1),
                             hidden_size_memory_unit_2=int(hidden_size_memory_unit_2),linear_layer_units_1 = int(linear_layer_units_1),
                             linear_layer_units_2 = int(linear_layer_units_2), Unique_character_list = trainer.data_generator_train.Unique_character_list)
-        criterion = nn.CTCLoss(blank=4, reduction='mean', zero_infinity=True)
+        criterion = nn.CTCLoss(blank= 4, reduction='mean', zero_infinity=True)
         loss = trainer.train(Neural_Network =CNN,criterion = criterion,learning_rate = learning_rate)
         return loss
 
