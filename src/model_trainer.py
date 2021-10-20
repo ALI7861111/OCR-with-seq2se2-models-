@@ -1,10 +1,9 @@
 import torch
 import os
-from data_loader import captcha_images_v2_dataset
+from src.data_loader import captcha_images_v2_dataset
 class train_NN:
   def __init__(self,epochs,batch_size,directory_training_data,
-               directory_test_data,directory_val_data,
-               Neural_Network,criterion,learning_rate):
+               directory_test_data,directory_val_data):
 
     self.epochs = epochs
     self.batch_size = batch_size
@@ -14,12 +13,15 @@ class train_NN:
     self.data_generator_train = captcha_images_v2_dataset(self.directory_training_data) 
     self.data_generator_test = captcha_images_v2_dataset(self.directory_test_data) 
     self.data_generator_val = captcha_images_v2_dataset(self.directory_val_data)
+
+
+  def train(self,Neural_Network,criterion,learning_rate):
+    
     self.Neural_Network = Neural_Network
     self.criterion = criterion
     self.learning_rate = learning_rate
     self.optimizer = torch.optim.Adam(self.Neural_Network.parameters(), lr=self.learning_rate)
 
-  def train(self):
     loss_total = 0
     for i in range(0,self.epochs):
       for steps in range(0,int(len(os.listdir(self.directory_training_data))/self.batch_size)):
