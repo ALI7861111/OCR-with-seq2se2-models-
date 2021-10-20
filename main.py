@@ -15,7 +15,8 @@ parser.add_argument('--valid_data_path', type =str, default='/content/valid',
                     help='Validation data for the OCR')
 parser.add_argument('--train_data_path', type =str, default='/content/train',
                     help='Training data for the OCR')
-
+parser.add_argument('--epochs', type =int, default=2,
+                    help='The Epochs for training Each Neural Network')
 args = parser.parse_args()
 
 
@@ -23,12 +24,10 @@ args = parser.parse_args()
 test_path = args.test_data_path
 valid_path =args.valid_data_path
 train_path = args.train_data_path
+epochs = args.epochs
 
 
 
-
-trainer = train_NN(epochs=2,batch_size=16,directory_training_data=train_path,
-                  directory_test_data=test_path,directory_val_data=valid_path)
 
 def objective(trial):
     # CNN = NeuralNetwork(number_layers=3,input_channels=3,batch_size = 16,
@@ -56,12 +55,14 @@ def objective(trial):
     linear_layer_units_2 =  trial.suggest_categorical('linear layer units 2', [128,256,512])
     #linear_layer_units_2 = 256
     learning_rate =  trial.suggest_float('learning rate', 0,0.000000001)
-    #batch_size    =  trial.suggest_int('batch_size', 16)
+    batch_size    =  trial.suggest_categorical('batch_size', [16,32,64,128])
     #batch_size    = trial.suggest_categorical('linear layer units 2', [16])
-    batch_size = 16
+    #batch_size = 16
 
 
     try :
+        trainer = train_NN(epochs=epochs,batch_size=batch_size,directory_training_data=train_path,
+                  directory_test_data=test_path,directory_val_data=valid_path)
 
         CNN = NeuralNetwork(number_layers=int(nb_conv_layers),input_channels=3,batch_size = batch_size,
                             growth_factor=growth_array ,num_layers_memory_unit=int(number_layer_memory_unit),
@@ -74,6 +75,8 @@ def objective(trial):
 
     except:
         print('Failed')
+        # if the construction of the neural Networks fails the loss returned should be high as a indicator to surrogate function that parameters
+        # were the worst paramteres.
         return 100
 
     
