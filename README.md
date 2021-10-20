@@ -3,14 +3,12 @@ This repository contains Seq2Seq OCR development. The purpose of the repository 
 
 1.  Architectures 
 2.  Learning rates
-3.  Number of convolution layers
+3.  Number of convolution layers 
 4.  Number of nodes in linear layers
-5.  Number of convolution layers 
-6.  Number of nodes in linear layers
-7.  Growth relationship in convolution layers
-8.  Number of layers in memory units
-9.  Hidden size in memory units
-10. Batch size
+5.  Growth relationship in convolution layers
+6.  Number of layers in memory units
+7.  Hidden size in memory units
+8.  Batch size
 
 ## Dataset
 
