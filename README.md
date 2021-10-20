@@ -40,12 +40,14 @@ import shutil
 # Getting test dataset from all the data
 # Path given according to jupyter files you can add your custom path
 
-source = '/content/captcha_images_v2'
+# The source directory is the images for training images 
+
+source = PATH TO THE SOURCE IMAGES
 try:
-  os.makedirs('/content/test')
+  os.makedirs(PATH TO THE TEST IMAGES)
 except:
   print('Error Creating Directory')
-dest = '/content/test'
+dest = PATH TO THE TEST IMAGES
 files = os.listdir(source)
 # Approximately 10 percent of the dataset
 no_of_files = 90
@@ -57,12 +59,12 @@ except:
 # Making validation dataset from all the data
 
 
-source = '/content/captcha_images_v2'
+source = PATH TO THE SOURCE IMAGES
 try:
-  os.makedirs('/content/valid')
+  os.makedirs(PATH TO THE VALIDATION IMAGES)
 except:
   print('Error Creating Directory')
-dest = '/content/valid'
+dest = PATH TO THE VALIDATION IMAGES
 files = os.listdir(source)
 # Approximately 10 percent of the dataset
 no_of_files = 90
