@@ -18,7 +18,7 @@ One way of alleviating this burden is by constructing approximation models, know
 If we have an search space {s1,s2,s3....s200}
 
 The agent/model takes only 4 varaibles from search space 
-A = MODEL (SX1,SX2,SX3,SX4)
+i.e. agent = MODEL(SX1,SX2,SX3,SX4)
 
 All the 200! ( permuation ) combinations cannot be applied. So the surrogate function will take some trails 
 and approximation to get the minimum Error E.
