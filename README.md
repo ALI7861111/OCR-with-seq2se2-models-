@@ -125,3 +125,64 @@ except:
 
 
 ```
+
+
+## Getting the Trained Model
+
+After getting the optimized parameters from the surrogate function saved into the csv.
+Train your model consisting of the best Hyperparameters and save the model. This can be done by following code.
+
+
+``` python
+
+from torch import nn
+import torch
+from src.seq2seq_NN import NeuralNetwork
+from src.model_trainer import train_NN
+import argparse
+
+
+
+parser = argparse.ArgumentParser(description="OCR Development")
+
+
+parser.add_argument("--test_data_path", type=str, default='/content/test',
+                    help='Testing data for the OCR')
+parser.add_argument('--valid_data_path', type =str, default='/content/valid',
+                    help='Validation data for the OCR')
+parser.add_argument('--train_data_path', type =str, default='/content/train',
+                    help='Training data for the OCR')
+parser.add_argument('--epochs', type =int, default=2,
+                    help='The Epochs for training Each Neural Network')
+args = parser.parse_args()
+
+
+
+test_path = args.test_data_path
+valid_path =args.valid_data_path
+train_path = args.train_data_path
+epochs = args.epochs
+
+
+trainer = train_NN(epochs=epochs,directory_training_data=train_path,
+                  directory_test_data=test_path,directory_val_data=valid_path)
+
+
+
+CNN = NeuralNetwork(number_layers=int(BEST OPTIMAL PARAMETER),input_channels=3,
+                    batch_size = batch_size,
+                    growth_factor=BEST OPTIMAL PARAMETER ,num_layers_memory_unit=int(BEST OPTIMAL PARAMETER),
+                    input_size=(1,3,50,200), hidden_size_memory_unit_1=int(BEST OPTIMAL PARAMETER),
+                    hidden_size_memory_unit_2=int(BEST OPTIMAL PARAMETER),linear_layer_units_1 = int(BEST OPTIMAL PARAMETER),linear_layer_units_2 = int(BEST OPTIMAL PARAMETER), Unique_character_list = trainer.data_generator_train.Unique_character_list)
+
+criterion = nn.CTCLoss(blank= 4, reduction='mean', zero_infinity=True)
+
+loss = trainer.train(Neural_Network =CNN,criterion = criterion,learning_rate = BEST LEARNING RATE,batch_size=BEST BATCH SIZE, optimizer=BEST OPTIMIZER)
+
+torch.save(CNN.state_dict(), PATH)
+
+```
+
+
+
+
