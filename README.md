@@ -9,6 +9,7 @@ This repository contains Seq2Seq OCR development. The purpose of the repository 
 6.  Number of layers in memory units
 7.  Hidden size in memory units
 8.  Batch size
+9.  Optimizer
 
 ## Seq2Seq models 
 
@@ -64,6 +65,10 @@ https://github.com/AakashKumarNain/CaptchaCracker/raw/master/captcha_images_v2.z
 
 or you can run the below command to automatically download and unzip the dataset. 
 
+The datset follows the rule. Every image with the captions inside it has its name with caption.png
+
+If and image has A12DF written in it.It should be saved with the nemae A12DF.png
+
 ```bash
 
 curl -LO https://github.com/AakashKumarNain/CaptchaCracker/raw/master/captcha_images_v2.zip
@@ -94,7 +99,7 @@ except:
 dest = PATH TO THE TEST IMAGES
 files = os.listdir(source)
 # Approximately 10 percent of the dataset
-no_of_files = 90
+no_of_files = NUMBER OF FILES FOR TEST DATA
 try:
   for file_name in random.sample(files, no_of_files):
       shutil.move(os.path.join(source, file_name), dest)
@@ -111,7 +116,7 @@ except:
 dest = PATH TO THE VALIDATION IMAGES
 files = os.listdir(source)
 # Approximately 10 percent of the dataset
-no_of_files = 90
+no_of_files = NUMBER OF FILES FOR VALIDATION DATA
 try:
   for file_name in random.sample(files, no_of_files):
       shutil.move(os.path.join(source, file_name), dest)

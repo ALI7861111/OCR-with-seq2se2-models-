@@ -27,7 +27,8 @@ train_path = args.train_data_path
 epochs = args.epochs
 
 
-
+trainer = train_NN(epochs=epochs,directory_training_data=train_path,
+                  directory_test_data=test_path,directory_val_data=valid_path)
 
 def objective(trial):
 
@@ -48,22 +49,25 @@ def objective(trial):
     linear_layer_units_2 =  trial.suggest_categorical('linear layer units 2', [128,256,512])
     #linear_layer_units_2 = 256
     learning_rate =  trial.suggest_float('learning rate', 0,0.000000001)
-    batch_size    =  trial.suggest_categorical('batch_size', [16,32,64,128])
+    batch_size    =  trial.suggest_categorical('batch_size', [16,32,64])
+    optimizer     =  trial.suggest_categorical('Optimizer', ['Adadelta','Adagrad','Adam','AdamW','Adamax','SGD'])
+
     #batch_size    = trial.suggest_categorical('linear layer units 2', [16])
     #batch_size = 16
 
 
     try :
-        trainer = train_NN(epochs=epochs,batch_size=batch_size,directory_training_data=train_path,
-                  directory_test_data=test_path,directory_val_data=valid_path)
+
 
         CNN = NeuralNetwork(number_layers=int(nb_conv_layers),input_channels=3,batch_size = batch_size,
                             growth_factor=growth_array ,num_layers_memory_unit=int(number_layer_memory_unit),
                             input_size=(1,3,50,200), hidden_size_memory_unit_1=int(hidden_size_memory_unit_1),
                             hidden_size_memory_unit_2=int(hidden_size_memory_unit_2),linear_layer_units_1 = int(linear_layer_units_1),
                             linear_layer_units_2 = int(linear_layer_units_2), Unique_character_list = trainer.data_generator_train.Unique_character_list)
+        
         criterion = nn.CTCLoss(blank= 4, reduction='mean', zero_infinity=True)
-        loss = trainer.train(Neural_Network =CNN,criterion = criterion,learning_rate = learning_rate)
+
+        loss = trainer.train(Neural_Network =CNN,criterion = criterion,learning_rate = learning_rate,batch_size=batch_size, optimizer=optimizer)
         return loss
 
     except:

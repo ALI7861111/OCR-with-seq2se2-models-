@@ -2,11 +2,10 @@ import torch
 import os
 from src.data_loader import captcha_images_v2_dataset
 class train_NN:
-  def __init__(self,epochs,batch_size,directory_training_data,
+  def __init__(self,epochs,directory_training_data,
                directory_test_data,directory_val_data):
 
     self.epochs = epochs
-    self.batch_size = batch_size
     self.directory_training_data = directory_training_data
     self.directory_test_data = directory_test_data
     self.directory_val_data  = directory_val_data
@@ -15,12 +14,14 @@ class train_NN:
     self.data_generator_val = captcha_images_v2_dataset(self.directory_val_data)
 
 
-  def train(self,Neural_Network,criterion,learning_rate):
-    
+  def train(self,Neural_Network,criterion,learning_rate,batch_size,optimizer):
+
+    self.batch_size = batch_size
     self.Neural_Network = Neural_Network
     self.criterion = criterion
     self.learning_rate = learning_rate
-    self.optimizer = torch.optim.Adam(self.Neural_Network.parameters(), lr=self.learning_rate)
+    self.optimizer = getattr(torch.optim, str(optimizer))(self.Neural_Network.parameters(), lr=self.learning_rate)
+    #self.optimizer = torch.optim.Adam(self.Neural_Network.parameters(), lr=self.learning_rate)
 
     loss_total = 0
     for i in range(0,self.epochs):
@@ -39,12 +40,13 @@ class train_NN:
         loss_total = loss_total + loss
       loss_total = loss_total/int(len(os.listdir(self.directory_training_data)))
       print('The training loss for epoch '+ str(i) + ' is '+ str(loss_total) )
-      print('The validation loss for epoch '+str(i)+' is '+str(self.validation()))
-    test_score = self.test()
+      print('The validation loss for epoch '+str(i)+' is '+str(self.validation(batch_size=self.batch_size)))
+    test_score = self.test(batch_size=self.batch_size)
     print('The testing loss model was '+str(test_score))
     return test_score
 
-  def test(self):
+  def test(self,batch_size):
+    self.batch_size = batch_size
     loss_total = 0
     for steps in range(0,int(len(os.listdir(self.directory_test_data))/self.batch_size)):
         x_train , y_train = self.data_generator_test.__getitem__(batch_size=self.batch_size)
@@ -60,7 +62,8 @@ class train_NN:
     loss_total = loss_total/int(len(os.listdir(self.directory_test_data)))
     return loss_total
 
-  def validation(self):
+  def validation(self,batch_size):
+    self.batch_size = batch_size
     loss_total = 0
     for steps in range(0,int(len(os.listdir(self.directory_val_data))/self.batch_size)):
         x_train , y_train = self.data_generator_val.__getitem__(batch_size=self.batch_size)
