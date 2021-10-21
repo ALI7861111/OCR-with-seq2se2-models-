@@ -170,7 +170,7 @@ trainer = train_NN(epochs=epochs,directory_training_data=train_path,
 
 
 CNN = NeuralNetwork(number_layers=int(BEST OPTIMAL PARAMETER),input_channels=3,
-                    batch_size = batch_size,
+                    batch_size = BEST BATCH SIZE,
                     growth_factor=BEST OPTIMAL PARAMETER ,num_layers_memory_unit=int(BEST OPTIMAL PARAMETER),
                     input_size=(1,3,50,200), hidden_size_memory_unit_1=int(BEST OPTIMAL PARAMETER),
                     hidden_size_memory_unit_2=int(BEST OPTIMAL PARAMETER),linear_layer_units_1 = int(BEST OPTIMAL PARAMETER),linear_layer_units_2 = int(BEST OPTIMAL PARAMETER), Unique_character_list = trainer.data_generator_train.Unique_character_list)
