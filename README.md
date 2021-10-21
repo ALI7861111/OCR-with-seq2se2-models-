@@ -10,6 +10,37 @@ This repository contains Seq2Seq OCR development. The purpose of the repository 
 7.  Hidden size in memory units
 8.  Batch size
 
+## Surrogate Functions
+
+A surrogate model is an engineering method used when an outcome of interest cannot be easily directly measured. 
+One way of alleviating this burden is by constructing approximation models, known as surrogate models. 
+
+If we have an search space {s1,s2,s3....s200}
+
+The agent/model takes only 4 varaibles from search space 
+A = MODEL (SX1,SX2,SX3,SX4)
+
+All the 200! ( permuation ) combinations cannot be applied. So the surrogate function will take some trails 
+and approximation to get the minimum Error E.
+
+#### Sudo Code For surrogate function
+```
+Search_space = {s1,s2,s3....s200}
+Total_trails = N
+loss = None
+while trails =< total_trails { 
+
+Sx1,Sx2,sx3,sx4 = surrogate_function.suggest(Search_space,loss)
+
+MODEL = MODEL(sx1,sx2,sx3,sx4)
+loss  = MODEL.train()  
+  
+}
+```
+
+The model will try to get the best parameters that minimize the loss. This technique is used to exploit the best hyper-parameter from a given search space of hyper-parameters. 
+
+
 ## Dataset
 
 You can use custom dataset for this repository but if custom dataset is not avaliable than you can download dataset for captcha images from 

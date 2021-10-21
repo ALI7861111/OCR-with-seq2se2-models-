@@ -3,7 +3,7 @@ from torch import nn
 from src.seq2seq_NN import NeuralNetwork
 from src.model_trainer import train_NN
 import argparse
-import torch
+
 
 
 parser = argparse.ArgumentParser(description="OCR Development")
@@ -77,4 +77,8 @@ def objective(trial):
 
 study = optuna.create_study(direction = 'minimize')
 study.optimize(objective, n_trials=100)
+
+df = study.trials_dataframe()
+df.to_csv('Results.csv')
+
 
