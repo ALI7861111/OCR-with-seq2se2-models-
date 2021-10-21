@@ -10,6 +10,21 @@ This repository contains Seq2Seq OCR development. The purpose of the repository 
 7.  Hidden size in memory units
 8.  Batch size
 
+## Seq2Seq models 
+
+Sequence to Sequence (often abbreviated to seq2seq) models is a special class of Recurrent Neural Network architectures that we typically use (but not restricted) to solve complex Language problems like Machine Translation, Question Answering, creating Chatbots, Text Summarization, etc.
+
+Seq2Seq model are also used for development of the OCR development with CTC-LOSS. 
+
+![Seq2seq for translation](https://miro.medium.com/max/1400/1*_rSHLjFShknAu3jt3rbcNQ.png)
+
+## CTC-LOSS
+
+A Connectionist Temporal Classification Loss, or CTC Loss, is designed for tasks where we need alignment between sequences, but where that alignment is difficult - e.g. aligning each character to its location in an audio file. It calculates a loss between a continuous (unsegmented) time series and a target sequence. It does this by summing over the probability of possible alignments of input to target, producing a loss value which is differentiable with respect to each input node. The alignment of input to target is assumed to be “many-to-one”, which limits the length of the target sequence such that it must be  the input length.
+
+![CTC LOSS FUNCTION OUTPUT](https://miro.medium.com/max/1200/1*1_5KnLvaTkGUFoyat2jHcQ.png)
+
+
 ## Surrogate Functions
 
 A surrogate model is an engineering method used when an outcome of interest cannot be easily directly measured. 
