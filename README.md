@@ -127,7 +127,7 @@ except:
 ```
 
 
-## Getting the Trained Model
+## Saving the best Hyper-parameter Trained Model
 
 After getting the optimized parameters from the surrogate function saved into the csv.
 Train your model consisting of the best Hyperparameters and save the model. This can be done by following code.
