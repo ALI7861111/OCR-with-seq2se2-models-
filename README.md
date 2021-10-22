@@ -187,5 +187,21 @@ torch.save(CNN.state_dict(), PATH)
 ```
 
 
+## CTC decode 
+
+In order to decode the outputs from Neural Network.
+
+The following library could be used to decode the predictions:
+
+https://github.com/parlance/ctcdecode
+https://github.com/nanoporetech/fast-ctc-decode
+
+The details for CTC decode can be seen as:
+
+https://towardsdatascience.com/beam-search-decoding-in-ctc-trained-neural-networks-5a889a3d85a7
+
+
+
+
 
 
